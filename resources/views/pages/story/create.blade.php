@@ -17,6 +17,7 @@
                 <a class="back-to-home" href="{{ route('app.home') }}">&larr; Back to Home</a>
             </div>
             <form class="py-3 px-2 px-lg-0" action="{{ route('story.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-3">
                     <label for="storyImgCover" class="form-label">Story Image Cover</label>
                     <img class="d-block mb-3" id="storyImgCoverPreview" src="holder.js/300x225?text=Image" alt="cover">
@@ -43,12 +44,16 @@
                     <label for="storyContent" class="form-label">Story Content</label>
                     <textarea class="form-control" id="storyContent" name="content"></textarea>
                 </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </div>
             </form>
         </div>
     </main>
 @endsection
 
 @section('scripts')
+    @include('partials.sweet-alert')
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
