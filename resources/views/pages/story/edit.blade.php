@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create New Story')
+@section('title', 'Edit Story')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/story/create.css') }}">
@@ -15,14 +15,16 @@
             <div
                 class="d-flex justify-content-between flex-column flex-md-row
                   align-items-center py-3 mb-3 border-bottom">
-                <h2 class="fw-bold">Create New Story</h2>
-                <a class="back-to-home" href="{{ route('app.home') }}">&larr; Back to Home</a>
+                <h2 class="fw-bold">Edit Story</h2>
+                <a class="back-to-home" href="{{ route('story.show', $story->uuid) }}">&larr; Back to Story</a>
             </div>
-            <form class="py-3 px-2 px-lg-0" action="{{ route('story.store') }}" method="POST" enctype="multipart/form-data">
+            <form class="py-3 px-2 px-lg-0" action="{{ route('story.update', $story->uuid) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="storyImgCover" class="form-label">Story Image Cover</label>
-                    <img class="d-block mb-3" id="storyImgCoverPreview" src="holder.js/300x225?text=Image">
+                    <img class="d-block mb-3" id="storyImgCoverPreview" src="{{ asset($story->cover) }}">
                     <input class="form-control @error('cover') is-invalid @enderror" type="file" id="storyImgCover"
                         accept="image/png, image/jpeg" onchange="loadFile(event)" name="cover">
                     @error('cover')
@@ -34,7 +36,7 @@
                 <div class="mb-3">
                     <label for="storyTitle" class="form-label">Story Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="storyTitle"
-                        name="title" value="{{ old('title') }}">
+                        name="title" value="{{ old('title', $story->title) }}">
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -57,7 +59,7 @@
                 <div class="mb-3">
                     <label for="storySynopsis" class="form-label">Story Synopsis</label>
                     <textarea class="form-control @error('synopsis') is-invalid @enderror" id="storySynopsis" rows="3"
-                        name="synopsis">{{ old('synopsis') }}</textarea>
+                        name="synopsis">{{ old('synopsis', $story->synopsis) }}</textarea>
                     @error('synopsis')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -66,7 +68,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="storyContent" class="form-label">Story Content</label>
-                    <textarea class="form-control @error('content') is-invalid @enderror" id="storyContent" rows="3" name="content">{{ old('content') }}</textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror" id="storyContent" rows="3" name="content">{{ old('content', $story->content) }}</textarea>
                     @error('content')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -74,7 +76,7 @@
                     @enderror
                 </div>
                 <div class="d-flex">
-                    <button type="submit" class="btn btn-secondary ms-auto">Create</button>
+                    <button type="submit" class="btn btn-secondary ms-auto">Save</button>
                 </div>
             </form>
         </div>

@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Modules\Story\StoryService;
 
 class AppController extends Controller
 {
+    public StoryService $storyService;
+
+    public function __construct(StoryService $storyService) {
+        $this->storyService = $storyService;
+    }
+
     public function home()
     {
-        return view('pages.home');
+        $stories = $this->storyService->getAllStories('date_desc');
+        return view('pages.home', compact('stories'));
     }
 }
+
