@@ -1,0 +1,14 @@
+img[alt="cover"] {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    object-fit: contain;
+    background-color: #ececec;
+}
+
+.story-synopsis {
+    text-align: justify;
+}
+
+.story-content {
+    text-align: justify;
+}

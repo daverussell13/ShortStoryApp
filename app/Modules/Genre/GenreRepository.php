@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Genre;
 
-use Illuminate\Database\Eloquent\Collection;
 use App\Models\Genre;
+use Illuminate\Database\Eloquent\Collection;
 
 class GenreRepository {
 
@@ -14,4 +14,20 @@ class GenreRepository {
         return Genre::all();
     }
 
+    public function getGenreById(int $id): Genre
+    {
+        return Genre::find($id);
+    }
+
+    public function getGenreByName(string $name): Genre
+    {
+        return Genre::where('name', $name)->first();
+    }
+
+    public function insertGenre(string $genreName): Genre
+    {
+        return Genre::create([
+            'name' => $genreName
+        ]);
+    }
 }

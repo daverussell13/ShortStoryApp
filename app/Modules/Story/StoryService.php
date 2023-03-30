@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App\Modules\Story;
+
 
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,21 +10,27 @@ use Illuminate\Http\UploadedFile;
 
 class StoryService {
 
-    private StoryRepository $storyRepository;
+    private StoryRepository $repository;
 
-    public function __construct(StoryRepository $storyRepository)
+    public function __construct(StoryRepository $repository){
+        $this->repository = $repository;
+    }
+
+    public function getAllStories(?string $sorted): Collection
     {
-        $this->storyRepository = $storyRepository;
+        switch ($sorted) {
+            case 'date_asc':
+                return $this->repository->getStoriesSortedByDate('asc');
+            case 'date_desc':
+                return $this->repository->getStoriesSortedByDate('desc');
+            default:
+                return $this->repository->getStories();
+        }
     }
 
     public function createNewStory(array $validated): Story
     {
-        return $this->storyRepository->insertStory($validated);
-    }
-
-    public function getAllData(): Collection
-    {
-        return $this->storyRepository->getStories();
+        return $this->repository->insertStory($validated);
     }
 
     public function storeImageCover(UploadedFile $file): string
@@ -39,5 +45,16 @@ class StoryService {
 
         return $filename;
     }
-}
 
+    public function updateStoryById(Story $story, array $data): bool
+    {
+        $affectedRows = $this->repository->updateStoryByUlid($story->uuid, $data);
+        return $affectedRows != 0;
+    }
+
+    public function deleteStoryById(Story $story): bool
+    {
+        $affectedRows = $this->repository->deleteStoryByUlid($story->uuid);
+        return $affectedRows != 0;
+    }
+}

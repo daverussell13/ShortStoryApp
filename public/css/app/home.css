@@ -1,0 +1,63 @@
+.hero {
+    position: relative;
+    color: white;
+}
+
+.hero::before {
+    content: "";
+    background-image: url("https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80");
+    background-size: cover;
+    filter: brightness(40%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    opacity: 0.5;
+}
+
+.card-text {
+    height: 72px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    .card-title {
+        font-size: 1.25rem;
+    }
+}
+
+.card-title-wrapper {
+    gap: 5px;
+}
