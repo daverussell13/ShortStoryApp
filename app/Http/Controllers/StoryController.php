@@ -60,10 +60,6 @@ class StoryController extends Controller
 
     public function update(StoreStoryRequest $request, Story $story)
     {
-        if ($request->user()->cannot('update', $story)) {
-            redirect()->back()->with('error', 'Unauthorized request');
-        }
-
         $validated = $request->validated();
 
         if($request->hasFile('cover')) {
