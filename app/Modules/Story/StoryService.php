@@ -1,12 +1,14 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Modules\Story;
 
+namespace App\Modules\Story;
 
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
+use File;
 
 class StoryService {
 
@@ -28,6 +30,11 @@ class StoryService {
         }
     }
 
+    public function getPaginatedStories(int $page, string $column): LengthAwarePaginator
+    {
+        return $this->repository->getStoriesPaginated($page, $column);
+    }
+
     public function createNewStory(array $validated): Story
     {
         return $this->repository->insertStory($validated);
@@ -46,6 +53,28 @@ class StoryService {
         return $filename;
     }
 
+    public function hasDefaultCover(Story $story): bool
+    {
+        return $story->cover == config('story.cover_dir') . '/' . config('story.cover_default');
+    }
+
+    public function removeImageCover(string $filePath): bool
+    {
+        if (File::exists(public_path($filePath))) {
+            File::delete(public_path($filePath));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function removeIfNotDefaultCover(Story $story)
+    {
+        if (!$this->hasDefaultCover($story)) {
+            $this->removeImageCover($story->cover);
+        }
+    }
+
     public function updateStoryById(Story $story, array $data): bool
     {
         $affectedRows = $this->repository->updateStoryByUlid($story->uuid, $data);
@@ -58,3 +87,6 @@ class StoryService {
         return $affectedRows != 0;
     }
 }
+
+
+

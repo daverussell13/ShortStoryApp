@@ -60,10 +60,15 @@ class StoryController extends Controller
 
     public function update(StoreStoryRequest $request, Story $story)
     {
+        if ($request->user()->cannot('update', $story)) {
+            redirect()->back()->with('error', 'Unauthorized request');
+        }
+
         $validated = $request->validated();
 
         if($request->hasFile('cover')) {
             $validated['cover'] = $this->storyService->storeImageCover($request->file('cover'));
+            $this->storyService->removeIfNotDefaultCover($story);
         }
 
         $changed = $this->storyService->updateStoryById($story, $validated);
@@ -76,6 +81,8 @@ class StoryController extends Controller
     public function destroy(Story $story)
     {
         $deleted = $this->storyService->deleteStoryById($story);
+
+        $this->storyService->removeIfNotDefaultCover($story);
 
         return $deleted
             ? redirect(route('app.home'))->with('success', 'Successfully Delete Story')

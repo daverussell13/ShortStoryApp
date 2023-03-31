@@ -16,16 +16,13 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci corrupti nisi optio mollitia
                         ratione, officia consequatur quod dolorum rerum nesciunt!
                     </p>
-                    <p>
-                        <a href="{{ route('story.create') }}" class="btn btn-primary my-2">Create Story</a>
-                        <a href="#" class="btn btn-secondary my-2">Login</a>
-                    </p>
+                    <a href="{{ route('story.create') }}" class="btn btn-primary my-2">Create Story</a>
                 </div>
             </div>
         </section>
-        <div class="album py-5 bg-light">
+        <div class="album pt-5 bg-light">
             <div class="container-xl">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-3">
                     @foreach ($stories as $story)
                         <div class="col">
                             <div class="card shadow-sm" data-key="{{ $story->uuid }}"
@@ -44,6 +41,11 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        {{ $stories->links() }}
+                    </div>
                 </div>
             </div>
         </div>

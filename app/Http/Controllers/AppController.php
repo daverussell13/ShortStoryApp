@@ -14,7 +14,7 @@ class AppController extends Controller
 
     public function home()
     {
-        $stories = $this->storyService->getAllStories('date_desc');
+        $stories = $this->storyService->getPaginatedStories(5, 'created_at');
         return view('pages.home', compact('stories'));
     }
 }
