@@ -19,7 +19,7 @@
                     </li>
                 @else
                     <a class="btn btn-light me-1" href="{{ route('login.page') }}">Login</a>
-                    <a class="btn btn-secondary" href="">Register</a>
+                    <a class="btn btn-secondary" href="{{ route('register.page') }}">Register</a>
                 @endauth
             </ul>
         </div>

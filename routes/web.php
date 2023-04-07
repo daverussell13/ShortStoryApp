@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +28,13 @@ Route::get('story/{story}', [StoryController::class, 'show'])->name('story.show'
 Route::put('story/{story}', [StoryController::class, 'update'])->name('story.update');
 Route::delete('story/{story}', [StoryController::class, 'destroy'])->name('story.destroy');
 
-Route::get('login', [LoginController::class, 'create'])->name('login.page');
+Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
+
+
+Route::middleware('guest')->group(function() {
+    Route::get('login', [LoginController::class, 'create'])->name('login.page');
+    Route::post('login', [LoginController::class, 'store'])->name('login');
+
+    Route::get('register', [RegisterController::class, 'create'])->name('register.page');
+    Route::post('register', [RegisterController::class, 'store'])->name('register');
+});

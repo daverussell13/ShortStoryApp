@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Genre;
 use Illuminate\Database\Seeder;
 use App\Models\Story;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,9 +30,16 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $testUser = User::create([
+            "username" => "test",
+            "email" => "test@gmail.com",
+            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+        ]);
+
         Story::create([
             "title" => "Title 1",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -63,6 +71,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 2",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -94,6 +103,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 3",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -125,6 +135,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 4",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -156,6 +167,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 5",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -187,6 +199,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 6",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -218,6 +231,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 7",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>
@@ -249,6 +263,7 @@ class DatabaseSeeder extends Seeder
         Story::create([
             "title" => "Title 8",
             "cover" => config('story.cover_default'),
+            "user_id" => $testUser->id,
             "genre_id" => fake()->numberBetween(1, 7),
             "synopsis" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores non, qui rem nulla saepe et exercitationem nisi neque, dignissimos repellendus totam, enim obcaecati. Voluptas hic odio exercitationem, molestiae corporis amet provident dignissimos molestiae corporis amet provident dignissimos lorems",
             "content" =>

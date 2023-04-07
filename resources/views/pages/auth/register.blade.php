@@ -14,21 +14,22 @@
             <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
             <div class="form-floating">
                 <input type="text" class="form-control @error('username') is-invalid @enderror" id="usernameInput"
-                    placeholder="user1234" name="username">
+                    placeholder="user1234" name="username" value="{{ old('username') }}">
                 <label for="usernameInput">Username</label>
             </div>
             <div class="form-floating">
                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="emailInput"
-                    placeholder="name@example.com" name="email">
+                    placeholder="name@example.com" name="email" value="{{ old('email') }}">
                 <label for="emailInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="passwordInput"
+                    placeholder="Password" name="password">
                 <label for="passwordInput">Password</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="passwordConfInput" placeholder="password"
-                    name="password_confirmation">
+                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                    id="passwordConfInput" placeholder="password" name="password_confirmation">
                 <label for="passwordConfInput">Password Confirmation</label>
             </div>
             @error('username')

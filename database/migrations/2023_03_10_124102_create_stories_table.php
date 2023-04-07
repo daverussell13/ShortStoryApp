@@ -14,15 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stories', function (Blueprint $table) {
-            $table->ulid();
+            $table->ulid()->unique();
             $table->string('cover');
-            $table->unsignedBigInteger('genre_id');
+            $table->foreignUlid('user_id');
+            $table->foreignId('genre_id');
             $table->string('title', 100);
             $table->string('synopsis', 300);
             $table->longText('content');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('genre_id')->references('id')->on('genres');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
